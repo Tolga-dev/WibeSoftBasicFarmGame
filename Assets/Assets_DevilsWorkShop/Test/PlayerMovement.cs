@@ -11,7 +11,7 @@ namespace Assets_DevilsWorkShop.Test
         public Vector3 destination;
         public float movementSpeed = 5 ;
 
-        private void Awake()
+        private void Awake()    
         {
             playerAction = new PlayerAction();
         }
