@@ -61,15 +61,7 @@ namespace Entity.InGameObject.Buildings
             var createdObject = InstantiateCraftButton();
             informationUIPanel.createdButtons.Add(createdObject.gameObject);
 
-            float totalTime = 0;
-            foreach (var craftItem in recipe.ingredient)
-            {
-                var item = (SeedSo)craftItem.itemSo;
-                totalTime += item.finishForProduction;
-            }
-
-            totalTime *= buildingBooster;
-            
+            float totalTime = GetTotalTimeOfRecipe(recipe);
             createdObject.totalTime.text = totalTime.ToString(CultureInfo.InvariantCulture);
             
             createdObject.startTheAction.onClick.AddListener(() =>
@@ -96,6 +88,20 @@ namespace Entity.InGameObject.Buildings
             DisableUnusedIcons(createdObject);
         }
 
+        public float GetTotalTimeOfRecipe(Recipe recipe)
+        {
+            float totalTime = 0;
+            foreach (var craftItem in recipe.ingredient)
+            {
+                var item = (SeedSo)craftItem.itemSo;
+                totalTime += item.finishForProduction;
+            }
+
+            totalTime *= buildingBooster;
+
+            return totalTime;
+        }
+
         private void HandleAmount()
         {
             var inventorySo = GameManager.saveManager.gameDataSo.inventorySo;
@@ -108,22 +114,32 @@ namespace Entity.InGameObject.Buildings
 
         private void StartCooking(float totalTime)
         {
-            SetState(ProductionState.Started);
-            StartCoroutine(Cooking(totalTime));
-        }
-        private IEnumerator Cooking(float totalTime)
-        {
-            timerPanel.gameObject.SetActive(true);
-            timerPanel.StartATime(currentRecipe.result.itemSo,totalTime, EndOfTimeAction);
-            
             SetState(ProductionState.OnProduction);
             SetLeftTime(totalTime);
 
-            yield return new WaitForSeconds(totalTime);
+            var currentSo = currentRecipe.result.itemSo;
+            buildingInGameSaveSo.itemSo = currentSo;
+
+            timerPanel.gameObject.SetActive(true);
+            timerPanel.StartATime(currentRecipe.result.itemSo,totalTime, EndOfTimeAction,UpdateTimeAction);
+        }
+        
+        private void UpdateTimeAction(float currentTime)
+        {
+            var growthTime = currentRecipe.result.itemSo.finishForProduction;
+            SetLeftTime(growthTime - currentTime);
+        }
+        
+        protected override void EndOfTimeAction()
+        {
+            base.EndOfTimeAction();
+            
+            if(currentState == ProductionState.Empty)
+                return;
+            
             SetLeftTime(0);
             resultRender.sprite = currentRecipe.result.itemSo.itemSprite;
             SetState(ProductionState.ReadyToHarvest);
-
         }
 
         private CraftInformationButton InstantiateCraftButton()
@@ -192,6 +208,7 @@ namespace Entity.InGameObject.Buildings
             if (currentState == ProductionState.ReadyToHarvest)
             {
                 UpdateInventory();
+                SetLeftTime(0);
                 resultRender.sprite = null;
                 SetState(ProductionState.Empty);
             }
@@ -202,5 +219,26 @@ namespace Entity.InGameObject.Buildings
             GameManager.saveManager.gameDataSo.inventorySo.AddInventoryItem(currentRecipe.result.itemSo, amountOfProduct);
             GameManager.inventoryManager.SpawnInventoryUIItem(currentRecipe.result.itemSo, amountOfProduct);
         }
+        public override void SetActionBuilding()
+        {
+            base.SetActionBuilding();
+
+            currentState = buildingInGameSaveSo.productionState;
+            
+            if(currentState == ProductionState.Empty)
+                return;
+            
+            currentRecipe = new Recipe()
+            {
+                result = new CraftItem()
+                {
+                    amount = 1,
+                    itemSo = buildingInGameSaveSo.itemSo
+                }
+            };
+            
+            StartCooking(buildingInGameSaveSo.leftTime);
+        }
+        
     }
 }

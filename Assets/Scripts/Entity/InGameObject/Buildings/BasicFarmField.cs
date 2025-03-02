@@ -114,6 +114,7 @@ namespace Entity.InGameObject.Buildings
         {
             SetState(ProductionState.OnProduction);
             timerPanel.gameObject.SetActive(true);
+            
             var growthTime = leftTime == 0 ? plantItemSo.finishForProduction : leftTime;
             SetLeftTime(growthTime);
 
@@ -148,6 +149,11 @@ namespace Entity.InGameObject.Buildings
         {
             base.SetActionBuilding();
             
+            currentState = buildingInGameSaveSo.productionState;
+            
+            if(currentState == ProductionState.Empty)
+                return;
+
             plantItemSo = (SeedSo)buildingInGameSaveSo.itemSo;
             PlantSeed(buildingInGameSaveSo.leftTime);
         }

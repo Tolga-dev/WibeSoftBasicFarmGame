@@ -19,5 +19,10 @@ MonoBehaviour:
   - buildingSo: {fileID: 11400000, guid: b5d3a74aed55566d3b1e28a139bc4f9f, type: 2}
     position: {x: 1, y: -3.5, z: 0}
     productionState: 2
-    leftTime: 10
+    leftTime: 6.2643185
     itemSo: {fileID: 11400000, guid: 7f0a4e73b0d1de609928c7e130c5eebe, type: 2}
+  - buildingSo: {fileID: 11400000, guid: 40dfb84ecb8eb3c5ebfdcfc459bdd4dd, type: 2}
+    position: {x: 0.5, y: -3.25, z: 0}
+    productionState: 3
+    leftTime: 0
+    itemSo: {fileID: 11400000, guid: 305dd976cd689c3fabd116336b521de9, type: 2}

@@ -67,7 +67,7 @@ namespace Entity.InGameObject.Buildings
         }
         public virtual void SetActionBuilding()
         {
-            EndOfTimeAction();
+            base.EndOfTimeAction();
             isOnConstruction = false;
         }
     }
