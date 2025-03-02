@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Controller.InventoryControllers;
 using Managers.Base;
 using So;
 using So.GameObjectsSo.Base;
@@ -20,6 +21,7 @@ namespace Managers.Inventory
         public Button categoryPanelOpenButton;
         public Transform categoryPanel;
     }
+    
     [Serializable]
     public class InventorySlots : CategorySlots
     {
@@ -28,6 +30,10 @@ namespace Managers.Inventory
     
     public class InventoryManager : ManagerBase
     {
+        public InventorySlotsController inventorySlotsController;
+        public InventoryCurrencyController inventoryCurrencyController;
+        public InventoryItemController inventoryItemController;
+        
         [Header("Slots")] 
         public List<InventorySlots> categorySlotsList = new();
         
@@ -44,17 +50,9 @@ namespace Managers.Inventory
         public TextMeshProUGUI silverText;
         private void Start()
         {
-            foreach (var categorySlots in categorySlotsList)
-            {
-                categorySlots.categoryPanelOpenButton.onClick.AddListener(() =>
-                {
-                    foreach (var slots in categorySlotsList)
-                    {
-                        slots.categoryPanel.gameObject.SetActive(false);
-                    }
-                    categorySlots.categoryPanel.gameObject.SetActive(true);
-                });
-            }
+            inventorySlotsController.Initialization(this);
+            inventoryCurrencyController.Initialization(this);
+            inventoryItemController.Initialization(this);
 
             foreach (var inventoryCategory in gameManager.saveManager.gameDataSo.inventorySo.inventoryCategories)
             {

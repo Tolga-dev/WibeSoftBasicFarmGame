@@ -8138,6 +8138,7 @@ MonoBehaviour:
   gridLayout: {fileID: 1730217104}
   temp: {fileID: 0}
   prevPos: {x: 0, y: 0, z: 0}
+  cam: {fileID: 519420031}
 --- !u!1 &1987355956
 GameObject:
   m_ObjectHideFlags: 0
