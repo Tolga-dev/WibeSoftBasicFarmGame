@@ -19,15 +19,15 @@ this is a basic farm game made in unity. You can use it for your anything, Free.
 
 ## Game Architecture Overview
 
-| Component                                                       | Inherits From   | Sub-Components                          |
-|-----------------------------------------------------------------|----------------|------------------------------------------|
-| **Game Manager**                                                | -              | Building Manager, <br/>Shop Manager, <br/>Inventory Manager, <br/>Farming Manager|
-| **[Building Manager](#BuildingManager Class)**                  | ManagerBase    | TileMap Controller, <br/>Input Controller, <br/>Building Placement Controller, <br/>Building Creation Controller|
-| **[ShopManager Class](#ShopManager Class)**                     | ManagerBase    | Shop Slot Controller, <br/>Shop Buy Controller |
-| **[Inventory Manager](#Inventory Manager)**                     | ManagerBase    | Inventory Slots Controller,<br/> Inventory Currency Controller, <br/>Inventory Item Controller| 
-| **[Inventory Manager](#Farming Manager)**                  | ManagerBase    | Farming Slot Controller,<br/> Farming Item Controller|
-| **ManagerBase**                                                 | -              | GameManagerRef                        |
-| **Controller Base**                                             | -              | ManagerBaseRef                       |
+| Component                                                   | Inherits From   | Sub-Components                          |
+|-------------------------------------------------------------|----------------|------------------------------------------|
+| **Game Manager**                                            | -              | Building Manager, <br/>Shop Manager, <br/>Inventory Manager, <br/>Farming Manager |
+| **[Building Manager](https://github.com/Tolga-dev/WibeSoftBasicFarmGame/tree/main?tab=readme-ov-file#buildingmanager-class)** | ManagerBase    | TileMap Controller, <br/>Input Controller, <br/>Building Placement Controller, <br/>Building Creation Controller |
+| **[Shop Manager](https://github.com/Tolga-dev/WibeSoftBasicFarmGame/tree/main?tab=readme-ov-file#shopmanager-class)**     | ManagerBase    | Shop Slot Controller, <br/>Shop Buy Controller |
+| **[Inventory Manager](https://github.com/Tolga-dev/WibeSoftBasicFarmGame/tree/main?tab=readme-ov-file#inventory-manager)** | ManagerBase    | Inventory Slots Controller, <br/> Inventory Currency Controller, <br/>Inventory Item Controller |
+| **[Farming Manager](https://github.com/Tolga-dev/WibeSoftBasicFarmGame/tree/main?tab=readme-ov-file#farming-manager)**    | ManagerBase    | Farming Slot Controller, <br/> Farming Item Controller |
+| **ManagerBase**                                             | -              | GameManagerRef                          |
+| **Controller Base**                                         | -              | ManagerBaseRef                          |
 
 # BuildingManager Class
 
