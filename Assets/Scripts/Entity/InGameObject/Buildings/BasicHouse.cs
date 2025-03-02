@@ -65,7 +65,7 @@ namespace Entity.InGameObject.Buildings
             foreach (var craftItem in recipe.ingredient)
             {
                 var item = (SeedSo)craftItem.itemSo;
-                totalTime += item.finishTimeToFinish;
+                totalTime += item.finishForProduction;
             }
 
             totalTime *= buildingBooster;

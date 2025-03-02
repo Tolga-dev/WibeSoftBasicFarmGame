@@ -28,7 +28,7 @@ namespace Managers
             {
                 var currentBuilding = (BuildingBase)gameManager.buildingManager.
                     CreateNewInstanceInPosition(building,building.position);
-                currentBuilding.SetActionBuilding(building);
+                currentBuilding.SetActionBuilding();
             }
         }
     }

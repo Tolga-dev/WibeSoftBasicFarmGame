@@ -15,7 +15,6 @@ namespace So.GameObjectsSo.Building
     {
         public Sprite itemConstructionSprite;
         public BuildingType buildingType;
-        public float finishTimeToConstruction = 10f;
         public GameObject buildPrefab;
     }
 }

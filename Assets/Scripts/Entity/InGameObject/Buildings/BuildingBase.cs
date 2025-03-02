@@ -1,5 +1,6 @@
 using System;
 using Entity.InGameObject.Base;
+using So;
 using So.GameObjectsSo.Building;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -36,7 +37,7 @@ namespace Entity.InGameObject.Buildings
             timerPanel.gameObject.SetActive(true);
 
             var constructionEndAction = new Action(() => { isOnConstruction = false; });
-            timerPanel.StartATime(itemSo,buildingSo.finishTimeToConstruction, EndOfTimeAction + constructionEndAction);
+            timerPanel.StartATime(itemSo,buildingSo.finishForProduction, EndOfTimeAction + constructionEndAction);
 
             if (buildingInGameSaveSo == null || (buildingInGameSaveSo != null && buildingInGameSaveSo.buildingSo == null))
             {
@@ -62,12 +63,9 @@ namespace Entity.InGameObject.Buildings
         }
         protected void SetLeftTime(float leftTime)
         {
+            buildingInGameSaveSo.leftTime = leftTime;
         }
-
-        protected void SetLeftTimeReduce(float leftTime)
-        {
-        }
-        public virtual void SetActionBuilding(BuildingInGameSaveSo building)
+        public virtual void SetActionBuilding()
         {
             EndOfTimeAction();
             isOnConstruction = false;

@@ -104,37 +104,60 @@ namespace Entity.InGameObject.Buildings
             informationUIPanel.informationButton.gameObject.SetActive(false);
         }
  
-        private void PlantSeed()
+        private void PlantSeed(float leftTime = 0)
         {
             SetState(ProductionState.Started);
-            StartCoroutine(GrowPlant());
+            GrowPlant(leftTime);
+        }
+        
+        private void GrowPlant(float leftTime = 0)
+        {
+            SetState(ProductionState.OnProduction);
+            timerPanel.gameObject.SetActive(true);
+            var growthTime = leftTime == 0 ? plantItemSo.finishForProduction : leftTime;
+            SetLeftTime(growthTime);
+
+            timerPanel.StartATime(plantItemSo, growthTime,
+                EndOfTimeAction, UpdateTimeAction);
         }
 
-        private IEnumerator GrowPlant()
+        private void UpdateTimeAction(float currentTime)
         {
-            timerPanel.gameObject.SetActive(true);
-            timerPanel.StartATime(plantItemSo,plantItemSo.finishTimeToFinish, EndOfTimeAction);
-            
-            SetState(ProductionState.OnProduction);
-
-            var growthTime = plantItemSo.finishTimeToFinish;
-            SetLeftTime(growthTime);
-            
+            var growthTime = plantItemSo.finishForProduction;
+            buildingInGameSaveSo.itemSo = plantItemSo;
             var seedGrowSprites = plantItemSo.seedGrowSprites;
             var interval = growthTime / seedGrowSprites.Count;
-            foreach (var t in seedGrowSprites)
-            {
-                plantItemRenderer.sprite = t;
-                SetLeftTimeReduce(interval);
-                yield return new WaitForSeconds(interval);
-            }
+
+            var spriteIndex = Mathf.Clamp(Mathf.FloorToInt(currentTime / interval), 0, seedGrowSprites.Count - 1);
+            plantItemRenderer.sprite = seedGrowSprites[spriteIndex];
+
+            SetLeftTime(growthTime - currentTime);
+        }
+
+
+        protected override void EndOfTimeAction()
+        {
+            base.EndOfTimeAction();
+            
+            if(currentState == ProductionState.Empty)
+                return;
+            
             SetState(ProductionState.ReadyToHarvest);
         }
+        public override void SetActionBuilding()
+        {
+            base.SetActionBuilding();
+            
+            plantItemSo = (SeedSo)buildingInGameSaveSo.itemSo;
+            PlantSeed(buildingInGameSaveSo.leftTime);
+        }
+        
         private void Harvest()
         {
             if (currentState == ProductionState.ReadyToHarvest)
             {
                 UpdateInventory();
+                SetLeftTime(0);
                 plantItemRenderer.sprite = null;
                 SetState(ProductionState.Empty);
             }

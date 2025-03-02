@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Entity.InGameObject.Buildings;
+using So.GameObjectsSo.Base;
 using UnityEngine;
 
 namespace So.GameObjectsSo.Building
@@ -20,5 +21,6 @@ namespace So.GameObjectsSo.Building
         
         public ProductionState productionState;
         public float leftTime;
+        public ItemSo itemSo;
     }
 }

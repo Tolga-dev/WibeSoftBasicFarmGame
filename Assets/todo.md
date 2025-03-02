@@ -14,13 +14,14 @@
 * shop
   * kafama gore
 
-* genel kod upadte
-
 * Save Update
     * time
     * action
+      * suanki state koruma ve kullanma
+      * satin alinan item uzerinde bastan yapma 
+      * direk sure ile yapma son kayit eidlen
 
 * zoom in zoom out
 * closing ui elements easily
 
-* genel kod upadte
+* save to player pref

@@ -41,7 +41,7 @@ namespace Entity.InGameObject.Base
             isPlaced = true;
             BuildingManager.tileMapController.TakeArea(areaTemp);
         }
-        protected void EndOfTimeAction()
+        protected virtual void EndOfTimeAction()
         {
             timerPanel.gameObject.SetActive(false);
             itemSpriteRenderer.sprite = itemSo.itemSprite;

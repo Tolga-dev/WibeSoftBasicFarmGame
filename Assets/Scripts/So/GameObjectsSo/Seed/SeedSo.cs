@@ -14,7 +14,6 @@ namespace So.GameObjectsSo.Seed
     [CreateAssetMenu(fileName = "SeedSo", menuName = "So/SeedSo", order = 0)]
     public class SeedSo : ItemSo
     {
-        public float finishTimeToFinish = 10f;
         public List<Sprite> seedGrowSprites = new List<Sprite>();
         
         public Sprite finalProductSprite;

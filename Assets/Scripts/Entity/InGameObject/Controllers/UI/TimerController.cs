@@ -17,36 +17,37 @@ namespace Entity.InGameObject.Controllers.UI
         public Slider slider;
         public GameObject timerPanel;
 
-        public void StartATime(ItemSo itemSo,float time, Action endOfTimeAction = null)
+        public void StartATime(ItemSo itemSo, float leftTime = 0, Action endOfTimeAction = null, Action<float> updateTimeAction = null)
         {
-            Debug.Log("Timer Started " + time);
+            Debug.Log("Left Time " + leftTime);
             timerPanel.SetActive(true);
             itemNameText.text = itemSo.itemName;
-            StartCoroutine(Timer(time, endOfTimeAction));
+            StartCoroutine(Timer(itemSo, leftTime, endOfTimeAction, updateTimeAction));
         }
-        private IEnumerator Timer(float finishTimeToFinish, Action endOfTimeAction = null)
+
+        private IEnumerator Timer(ItemSo itemSo, float leftTime = 0, Action endOfTimeAction = null, Action<float> updateTimeAction = null)
         {
-            var time = finishTimeToFinish;
-            slider.maxValue = time;
-            slider.value = 0f;
+            var maxItemSo = itemSo.finishForProduction;
+            slider.maxValue = maxItemSo;
+            slider.value = maxItemSo - leftTime;
 
             var startTime = Time.time;
-            var endTime = startTime + time;
+            var endTime = startTime + leftTime;
 
             while (Time.time < endTime)
             {
-                var currentTime = Time.time - startTime;
-                slider.value = currentTime;
-                timerText.text = (time - currentTime).ToString("F2", CultureInfo.InvariantCulture);
-                yield return null;
+                var currentTimeLeft = endTime - Time.time;
+                slider.value = maxItemSo - currentTimeLeft;
+                timerText.text = currentTimeLeft.ToString("F2", CultureInfo.InvariantCulture);
+                updateTimeAction?.Invoke(maxItemSo - currentTimeLeft);
+                yield return null;  
             }
 
-            slider.value = time;
+            slider.value = 0f;
             timerText.text = "0.00";
             endOfTimeAction?.Invoke();
         }
-
-
+        
         public void OnDisable()
         {
             StopAllCoroutines();

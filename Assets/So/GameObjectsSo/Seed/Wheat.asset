@@ -19,7 +19,7 @@ MonoBehaviour:
   itemSprite: {fileID: 21300132, guid: 2700e06d970d112489ff23cfb58c3f78, type: 3}
   itemDescription: 
   inventoryCategory: 0
-  finishTimeToFinish: 1
+  finishTimeToFinish: 10
   seedGrowSprites:
   - {fileID: 21300060, guid: 2700e06d970d112489ff23cfb58c3f78, type: 3}
   - {fileID: 21300058, guid: 2700e06d970d112489ff23cfb58c3f78, type: 3}
