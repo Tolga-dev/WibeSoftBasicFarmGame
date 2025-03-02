@@ -30,163 +30,56 @@ namespace Managers.Inventory
     
     public class InventoryManager : ManagerBase
     {
+        [Header("Controllers")] 
         public InventorySlotsController inventorySlotsController;
         public InventoryCurrencyController inventoryCurrencyController;
         public InventoryItemController inventoryItemController;
         
         [Header("Slots")] 
         public List<InventorySlots> categorySlotsList = new();
-        
         public InventoryItem itemPrefab;
         public Transform draggableItemsParent;
-
+        
+        [Header("Info")] 
         public Transform informationPanel;
         public TextMeshProUGUI informationText;
-        public Button sellThisItemButton;
-        public Button useThisItemButton;
         public InventorySlot currentSlot;
         
+        [Header("Currency")] 
         public TextMeshProUGUI goldText;
         public TextMeshProUGUI silverText;
+        public Button sellThisItemButton;
+        public Button useThisItemButton;
+        
         private void Start()
         {
             inventorySlotsController.Initialization(this);
             inventoryCurrencyController.Initialization(this);
             inventoryItemController.Initialization(this);
-
-            foreach (var inventoryCategory in gameManager.saveManager.gameDataSo.inventorySo.inventoryCategories)
-            {
-                foreach (var inventoryItem in inventoryCategory.inventoryItems)
-                {
-                    SpawnInventoryUIItem(inventoryItem.itemSo, inventoryItem.count);
-                }
-            }
             
             sellThisItemButton.onClick.AddListener(() =>
             {
                 Debug.Log("Sell");
-                var currencies = currentSlot.inventoryItem.currentItem.currencies;
-                gameManager.saveManager.gameDataSo.inventorySo.AddCurrencies(currencies);
-                UpdateCurrencyUI();
-                informationPanel.gameObject.SetActive(false);
-                HandleAmount();
+                inventoryCurrencyController.SellCurrentItem(currentSlot);
             });
+
             useThisItemButton.onClick.AddListener(() =>
             {
                 Debug.Log("Use");
-                var buildingSo = (BuildingSo)currentSlot.inventoryItem.currentItem;
-                gameManager.buildingManager.InitializeNewBuilding(buildingSo.buildPrefab);
-                informationPanel.gameObject.SetActive(false);
-                HandleAmount();
-                draggableItemsParent.gameObject.SetActive(false);
+                inventoryItemController.UseCurrentItem(currentSlot);
             });
-            
-            UpdateCurrencyUI();
+            inventoryCurrencyController.UpdateCurrencyUI();
         }
 
-        private void HandleAmount()
-        {
-            gameManager.saveManager.gameDataSo.inventorySo.RemoveInventoryItemByItemSo(currentSlot.inventoryItem.currentItem, 1);
-            currentSlot.HandleAmount();
-        }
-
-        public void UpdateCurrencyUI()
-        {
-            var inventorySo = gameManager.saveManager.gameDataSo.inventorySo;
-            silverText.text = "Silver:" + inventorySo.GetCurrencies(CurrencyEnum.Silver).currencyVal;
-            goldText.text = "Gold:" +inventorySo.GetCurrencies(CurrencyEnum.Gold).currencyVal;
-        }
-        public int SpawnInventoryUIItem(ItemSo item, int amount)
-        {
-            var categorySlots = GetSlot(item);
-            if (categorySlots == null)
-                return amount;
-            
-            var result = SearchForSameItem(categorySlots,item,amount);
-            if (result == 0)
-                return 0;
-
-            result = SearchForEmptyItem(categorySlots,item, amount);
-            if (result != 0)
-            {
-                Debug.Log("Inv Full!");
-                return result;
-            }
-            return 0;
-        }
-        private int SearchForEmptyItem(InventorySlots categorySlots,ItemSo inventoryItem, int amount)
-        {
-            foreach (var inventorySlot in categorySlots.slots)
-            {
-                if (inventorySlot.inventoryItem != null) 
-                    continue;
-
-                var createdItem = CreateNewInstance(inventorySlot,inventoryItem, amount);
-                inventorySlot.inventoryItem = createdItem;
-                break;
-            }
-            return 0;
-        }
-        public InventoryItem CreateNewInstance(InventorySlot inventorySlot, ItemSo item, int amountToAdd)
-        {
-            var createdItem= Instantiate(itemPrefab, inventorySlot.transform);
-            createdItem.SetItemData(item, inventorySlot);
-                
-            createdItem.amount = amountToAdd;
-            createdItem.SetAmount();
-            
-            createdItem.inventoryManager = this;
-            
-            return createdItem;
-        }
-        
-        private int SearchForSameItem(InventorySlots categorySlots,ItemSo inventoryItem, int amount)
-        {
-            foreach (var inventorySlot in categorySlots.slots)
-            {
-                var invItem = inventorySlot.inventoryItem;
-
-                if(invItem == null) continue;
-                
-                if (invItem.currentItem == inventoryItem)
-                {
-                    invItem.amount += amount;
-                    inventorySlot.inventoryItem.SetAmount();
-                    return 0;
-                }                
-            }
-            return amount;
-        }
-
-        public InventorySlots GetSlot(ItemSo inventoryItem)
-        {
-            InventorySlots categorySlots = null;
-            foreach (var inventorySlot in categorySlotsList)
-            {
-                if (inventorySlot.category == inventoryItem.inventoryCategory)
-                {
-                    categorySlots = inventorySlot;
-                    break;
-                }
-            }
-
-            return categorySlots;
-        }
-
-        public void SetDescriptionPanel(InventorySlot currentSlotVal,string descriptionPanelText)
+        public void SetDescriptionPanel(InventorySlot currentSlotVal, string descriptionPanelText)
         {
             currentSlot = currentSlotVal;
             informationPanel.gameObject.SetActive(true);
             informationText.text = descriptionPanelText;
 
-            if (currentSlotVal.inventoryItem.currentItem.GetType() != typeof(BuildingSo))
-            {
-                useThisItemButton.gameObject.SetActive(false);
-            }
-            else
-            {
-                useThisItemButton.gameObject.SetActive(true);
-            }
+            useThisItemButton.gameObject.
+                SetActive(currentSlotVal.inventoryItem.currentItem.GetType() == typeof(BuildingSo));
         }
+   
     }
 }

@@ -217,7 +217,7 @@ namespace Entity.InGameObject.Buildings
         {
             var amountOfProduct = currentRecipe.result.amount;
             GameManager.saveManager.gameDataSo.inventorySo.AddInventoryItem(currentRecipe.result.itemSo, amountOfProduct);
-            GameManager.inventoryManager.SpawnInventoryUIItem(currentRecipe.result.itemSo, amountOfProduct);
+            GameManager.inventoryManager.inventoryItemController.SpawnInventoryUIItem(currentRecipe.result.itemSo, amountOfProduct);
         }
         public override void SetActionBuilding()
         {

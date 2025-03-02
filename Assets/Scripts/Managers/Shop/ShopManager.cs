@@ -95,9 +95,9 @@ namespace Managers.Shop
             
             currencies.currencyVal -= itemCurrency.currencyVal;
 
-            inventoryManager.SpawnInventoryUIItem(itemSo,1);
+            inventoryManager.inventoryItemController.SpawnInventoryUIItem(itemSo,1);
             inventorySo.AddInventoryItem(itemSo,1);
-            inventoryManager.UpdateCurrencyUI();
+            inventoryManager.inventoryCurrencyController.UpdateCurrencyUI();
         }
     }
 }

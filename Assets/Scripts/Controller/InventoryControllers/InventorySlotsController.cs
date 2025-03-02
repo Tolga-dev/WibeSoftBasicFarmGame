@@ -9,16 +9,14 @@ namespace Controller.InventoryControllers
     [Serializable]
     public class InventorySlotsController : ControllerBase
     {
-        public List<InventorySlots> categorySlotsList = new();
-
         public override void Initialization(ManagerBase managerBaseVal)
         {
             base.Initialization(managerBaseVal);
-            foreach (var categorySlots in categorySlotsList)
+            foreach (var categorySlots in InventoryManager.categorySlotsList)
             {
                 categorySlots.categoryPanelOpenButton.onClick.AddListener(() =>
                 {
-                    foreach (var slots in categorySlotsList)
+                    foreach (var slots in InventoryManager.categorySlotsList)
                     {
                         slots.categoryPanel.gameObject.SetActive(false);
                     }
@@ -26,5 +24,7 @@ namespace Controller.InventoryControllers
                 });
             }
         }
+        public InventoryManager InventoryManager => (InventoryManager)ManagerBase;
+
     }
 }

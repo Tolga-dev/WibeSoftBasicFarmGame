@@ -18,7 +18,8 @@ namespace Controller
 
             if (Input.GetMouseButton(0))
             {
-                if (EventSystem.current.IsPointerOverGameObject(0))
+                if (EventSystem.current.IsPointerOverGameObject() || 
+                    (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)))
                     return;
 
                 if (!temp.isPlaced)

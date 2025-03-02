@@ -173,7 +173,7 @@ namespace Entity.InGameObject.Buildings
         {
             var amountOfProduct = plantItemSo.amountOfProduct;
             GameManager.saveManager.gameDataSo.inventorySo.AddInventoryItem(plantItemSo, amountOfProduct);
-            GameManager.inventoryManager.SpawnInventoryUIItem(plantItemSo, amountOfProduct);
+            GameManager.inventoryManager.inventoryItemController.SpawnInventoryUIItem(plantItemSo, amountOfProduct);
         }
     }
 

@@ -1440,11 +1440,11 @@ MonoBehaviour:
   draggableItemsParent: {fileID: 268555809}
   informationPanel: {fileID: 1713040842}
   informationText: {fileID: 988460585}
-  sellThisItemButton: {fileID: 317437906}
-  useThisItemButton: {fileID: 723250551}
   currentSlot: {fileID: 0}
   goldText: {fileID: 1881653112}
   silverText: {fileID: 1577095722}
+  sellThisItemButton: {fileID: 317437906}
+  useThisItemButton: {fileID: 723250551}
 --- !u!1 &464718927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,6 +1796,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1928,6 +1936,14 @@ PrefabInstance:
     - target: {fileID: 8630468790674094009, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
       propertyPath: m_Name
       value: Inventory_Slot
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2619,6 +2635,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3006,6 +3030,14 @@ PrefabInstance:
     - target: {fileID: 8630468790674094009, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
       propertyPath: m_Name
       value: Inventory_Slot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5061,6 +5093,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5844,6 +5884,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5976,6 +6024,14 @@ PrefabInstance:
     - target: {fileID: 8630468790674094009, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
       propertyPath: m_Name
       value: Inventory_Slot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6852,6 +6908,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7141,6 +7205,14 @@ PrefabInstance:
     - target: {fileID: 8630468790674094009, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
       propertyPath: m_Name
       value: Inventory_Slot
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7667,6 +7739,14 @@ PrefabInstance:
     - target: {fileID: 8630468790674094009, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
       propertyPath: m_Name
       value: Inventory_Slot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065620966102994548, guid: 4c1ec04cb7e74d75946fe67ff7a27846, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

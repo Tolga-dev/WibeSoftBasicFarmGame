@@ -45,7 +45,7 @@ namespace Managers.Inventory
             if (amount > 1)
             {
                 var dividedAmount = 1;  
-                _dividedInstance = inventoryManager.CreateNewInstance(activeSlot, currentItem, dividedAmount);
+                _dividedInstance = inventoryManager.inventoryItemController.CreateNewInstance(activeSlot, currentItem, dividedAmount);
                 amount -= dividedAmount;
                 
                 SetAmount();
