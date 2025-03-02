@@ -1,4 +1,5 @@
 using Managers;
+using Managers.Base;
 
 namespace Controller.Base
 {

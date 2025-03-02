@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: GameDataSo
   m_EditorClassIdentifier: 
   gameTileBaseSo: {fileID: 11400000, guid: 1e648088597fb5f899abed42feb0910e, type: 2}
+  seedSo: {fileID: 11400000, guid: 6bc796fb33f833acc8e185e40aa98f85, type: 2}
+  buildingsSo: {fileID: 11400000, guid: dad637c7320b7d37986cd8c238e7a448, type: 2}
+  craftSo: {fileID: 11400000, guid: 6eb40de026bfa2d73b3ec81ccdbc0cb3, type: 2}
+  inventorySo: {fileID: 11400000, guid: d5e831a28a86cf53190ef5a19ce22f4d, type: 2}

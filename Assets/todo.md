@@ -1,7 +1,22 @@
 * tarla koyma
   * seed ekleme
   * hasat etme
-* ev koyma
-* hayvan koyma
+
 * envantor koyma
-* harcama yapabilme
+
+* ev koyma
+  * hasatlardan urun yap
+  
+* save sistemi
+  * building save system
+    * action
+    * time
+    * position
+  
+* shop
+  * kafama gore
+
+* genel kod upadte
+
+
+* genel kod upadte

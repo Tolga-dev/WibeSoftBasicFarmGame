@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Controller;
-using Entity.Building;
+using Entity.InGameObject;
+using Entity.InGameObject.Base;
+using Managers.Base;
 using Second.Scripts.Managers;
 using So;
 using UnityEngine;
@@ -16,13 +18,14 @@ namespace Managers
         
         public GridLayout gridLayout;
         
-        public Building temp;
+        public InGameObjectBase temp;
         public Vector3Int prevPos;
 
-        public GameObject indicator;
         private void Start()
         {
             tileMapController.Initialization(this);
+
+            gameManager.saveManager.LoadDataFromSave();
         }
 
         private void Update() 
@@ -72,10 +75,8 @@ namespace Managers
             int size = baseArr.Length;
             var tileArray = new TileBase[size];
             
-            var buildingTiles = "";
             for (int i = 0; i < size; i++)
             {
-                buildingTiles += baseArr[i] + " ";
                 if(baseArr[i] == tileMapController.TileBases[TileTypes.White])
                     tileArray[i] = tileMapController.TileBases[TileTypes.Green];
                 else
@@ -84,11 +85,9 @@ namespace Managers
                     break;                    
                 }
             }
-            Debug.Log(buildingTiles);
             tileMapController.tempTileMap.SetTilesBlock(buildingArea, tileArray);
             tileMapController.prevArea = buildingArea;
         }
-
 
         // called from button
         public void InitializeNewBuilding(GameObject building)
@@ -96,8 +95,14 @@ namespace Managers
             if (temp != null && temp.isPlaced == false)
                 CleanObjects();
             
-            temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<Building>();
+            temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<InGameObjectBase>();
             FollowBuilding();
+        }
+        public InGameObjectBase CreateNewInstanceInPosition(GameObject building, Vector3 position)
+        {
+            var created = Instantiate(building, position, Quaternion.identity).GetComponent<InGameObjectBase>();
+            created.Place();
+            return created;
         }
 
         public void CleanObjects()

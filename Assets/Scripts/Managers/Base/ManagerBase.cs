@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Managers
+namespace Managers.Base
 {
     public class ManagerBase : MonoBehaviour
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Controller.Base;
 using Managers;
+using Managers.Base;
 using So;
 using UnityEngine;
 using UnityEngine.Tilemaps;

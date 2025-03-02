@@ -1,3 +1,4 @@
+using Managers.Inventory;
 using Second.Scripts.Core;
 
 namespace Managers
@@ -6,5 +7,6 @@ namespace Managers
     {
         public BuildingManager buildingManager;
         public SaveManager saveManager;
+        public InventoryManager inventoryManager;
     }
 }
