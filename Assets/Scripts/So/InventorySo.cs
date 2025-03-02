@@ -40,7 +40,7 @@ namespace So
             if (inventoryItem.count <= 0)
             {
                 inventoryItem.count = 50;
-                currentCategory.inventoryItems.Remove(inventoryItem);
+                // currentCategory.inventoryItems.Remove(inventoryItem);
             }
         }
         public InventoryItem GetInventoryItemByItemSo(ItemSo itemSo, int amount = 0)

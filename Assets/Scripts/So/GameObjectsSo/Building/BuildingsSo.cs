@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Entity.InGameObject.FarmFields;
+using Entity.InGameObject.Buildings;
 using UnityEngine;
 
 namespace So.GameObjectsSo.Building

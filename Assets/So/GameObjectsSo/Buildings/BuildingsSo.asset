@@ -15,8 +15,4 @@ MonoBehaviour:
   buildingSo:
   - {fileID: 11400000, guid: b5d3a74aed55566d3b1e28a139bc4f9f, type: 2}
   - {fileID: 11400000, guid: 40dfb84ecb8eb3c5ebfdcfc459bdd4dd, type: 2}
-  buildingSaveSos:
-  - buildingSo: {fileID: 11400000, guid: 40dfb84ecb8eb3c5ebfdcfc459bdd4dd, type: 2}
-    position: {x: 1, y: -3.5, z: 0}
-    productionState: 0
-    leftTime: 0
+  buildingSaveSos: []

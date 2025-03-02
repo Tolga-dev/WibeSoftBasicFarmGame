@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Controller;
 using Entity.InGameObject;
 using Entity.InGameObject.Base;
+using Entity.InGameObject.Buildings;
 using Managers.Base;
 using Second.Scripts.Managers;
 using So;
+using So.GameObjectsSo.Building;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -98,9 +100,10 @@ namespace Managers
             temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<InGameObjectBase>();
             FollowBuilding();
         }
-        public InGameObjectBase CreateNewInstanceInPosition(GameObject building, Vector3 position)
+        public InGameObjectBase CreateNewInstanceInPosition(BuildingInGameSaveSo building, Vector3 position)
         {
-            var created = Instantiate(building, position, Quaternion.identity).GetComponent<InGameObjectBase>();
+            var created = Instantiate(building.buildingSo.buildPrefab, position, Quaternion.identity).GetComponent<BuildingBase>();
+            created.buildingInGameSaveSo = building;
             created.Place();
             return created;
         }

@@ -9,8 +9,6 @@
   
 * save sistemi
   * building save system
-    * action
-    * time
     * position
   
 * shop
@@ -18,5 +16,8 @@
 
 * genel kod upadte
 
+* Save Update
+    * time
+    * action
 
 * genel kod upadte

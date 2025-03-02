@@ -15,8 +15,8 @@ namespace Managers
     
         public void LoadDataFromSave()
         {
-            // var buildings = gameDataSo.buildingsSo.buildingSaveSos;
-            // CreateBuildings(buildings);
+            var buildings = gameDataSo.buildingsSo.buildingSaveSos;
+            CreateBuildings(buildings);
         }
         public void SaveDataFromGame()
         {
@@ -26,8 +26,8 @@ namespace Managers
         {
             foreach (var building in buildings)
             {
-                var currentBuilding = (BuildingBase)gameManager.buildingManager.CreateNewInstanceInPosition(building.buildingSo.buildPrefab,
-                    building.position);
+                var currentBuilding = (BuildingBase)gameManager.buildingManager.
+                    CreateNewInstanceInPosition(building,building.position);
                 currentBuilding.SetActionBuilding(building);
             }
         }

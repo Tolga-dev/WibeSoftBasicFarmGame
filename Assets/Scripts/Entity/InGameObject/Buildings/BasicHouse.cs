@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Globalization;
+using System.Linq;
 using Entity.InGameObject.Base;
 using Entity.InGameObject.Controllers.UI;
-using Entity.InGameObject.FarmFields;
 using So;
 using So.GameObjectsSo.Building;
 using So.GameObjectsSo.Seed;
@@ -50,28 +50,16 @@ namespace Entity.InGameObject.Buildings
 
             foreach (var recipe in craftSo.recipes)
             {
-                CheckRecipeIngredient(recipe);
+                CreateRecipe(recipe);
             }
 
             informationUIPanel.informationButton.gameObject.SetActive(false);
         }
-
-        private void CheckRecipeIngredient(Recipe recipe)
-        {
-            var inventorySo = GameManager.saveManager.gameDataSo.inventorySo;
-            foreach (var ingredient in recipe.ingredient)
-            {
-                if (ItHasEnoughItem(ingredient, inventorySo))
-                {
-                    CreateRecipe(recipe);
-                    break;
-                }
-            }
-        }
-
+        
         private void CreateRecipe(Recipe recipe)
         {
             var createdObject = InstantiateCraftButton();
+            informationUIPanel.createdButtons.Add(createdObject.gameObject);
 
             float totalTime = 0;
             foreach (var craftItem in recipe.ingredient)
@@ -86,6 +74,16 @@ namespace Entity.InGameObject.Buildings
             
             createdObject.startTheAction.onClick.AddListener(() =>
             {
+                var inventorySo = GameManager.saveManager.gameDataSo.inventorySo;
+                foreach (var currentItem in recipe.ingredient)
+                {
+                    if (ItHasEnoughItem(currentItem, inventorySo) == false)
+                    {
+                        Debug.Log("No Enough!");
+                        return;
+                    }
+                }
+                
                 currentRecipe = recipe;
                 HandleAmount();
                 StartCooking(totalTime);
@@ -181,6 +179,9 @@ namespace Entity.InGameObject.Buildings
         private bool ItHasEnoughItem(CraftItem ingredient, InventorySo inventorySo)
         {
             var item = inventorySo.GetInventoryItemByItemSo(ingredient.itemSo);
+            if (item == null)
+                return false;
+            
             if (item.count >= ingredient.amount)
                 return true;
             return false;

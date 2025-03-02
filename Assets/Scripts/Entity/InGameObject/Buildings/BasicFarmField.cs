@@ -1,19 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Entity.InGameObject.Base;
-using Entity.InGameObject.Buildings;
 using Entity.InGameObject.Controllers.UI;
 using So;
 using So.GameObjectsSo.Seed;
-using So.Seed;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace Entity.InGameObject.FarmFields
+namespace Entity.InGameObject.Buildings
 {
 
     public enum ProductionState
@@ -97,6 +93,9 @@ namespace Entity.InGameObject.FarmFields
                 
                 button.onClick.AddListener(() =>
                 {
+                    if(inventoryItem.count <= 0)
+                        return;
+                    
                     plantItemSo = (SeedSo) inventoryItem.itemSo;
                     PlantSeed();
                     informationUIPanel.ClosePanel(button);
