@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Globalization;
+using Controller;
 using Entity.InGameObject.Controllers.UI;
 using Managers;
 using So;
@@ -21,36 +22,30 @@ namespace Entity.InGameObject.Base
 
         public ItemSo itemSo;
         
-        public bool CanBePlace()
-        {
-            var posInt = BuildingManager.gridLayout.WorldToCell(transform.position);
-            var areaTemp = area;
-            areaTemp.position = posInt;
-
-            if (BuildingManager.tileMapController.CanTakeArea(areaTemp))
-                return true;
-
-            return false;
-        }
-
+        public bool CanBePlace() => TileMapController.CanTakeArea(GetArea());
+        
         public virtual void Place()
         {
-            var posInt = BuildingManager.gridLayout.WorldToCell(transform.position);
-            var areaTemp = area;
-            areaTemp.position = posInt;
             isPlaced = true;
-            BuildingManager.tileMapController.TakeArea(areaTemp);
+            TileMapController.TakeArea(GetArea());
         }
+        
         protected virtual void EndOfTimeAction()
         {
             timerPanel.gameObject.SetActive(false);
             itemSpriteRenderer.sprite = itemSo.itemSprite;
         }
 
-        public virtual bool CanClickToGameObject()
+        public virtual bool CanClickToGameObject() => true;
+        
+        private BoundsInt GetArea()
         {
-            return true;
+            var tempArea = area;
+            tempArea.position = BuildingManager.gridLayout.WorldToCell(transform.position);
+            return tempArea;
         }
+        
+        protected TileMapController TileMapController => BuildingManager.tileMapController;
         protected GameManager GameManager => GameManager.Instance;
         public BuildingManager BuildingManager => GameManager.buildingManager;
 

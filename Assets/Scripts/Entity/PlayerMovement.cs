@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Entity
 {
+    // not used!
     public class PlayerMovement : MonoBehaviour
     {
         public Rigidbody2D _rigidbody2D;

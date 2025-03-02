@@ -14,20 +14,14 @@ namespace Entity.InGameObject.Buildings
         public bool isOnConstruction = false;
         public ProductionState currentState = ProductionState.Empty;
 
-        public override bool CanClickToGameObject()
-        {
-            if (isOnConstruction)
-            {
-                Debug.Log("On Construction");
-                return false;
-            }
-            return base.CanClickToGameObject();
-        }
+        public override bool CanClickToGameObject() => !isOnConstruction && base.CanClickToGameObject();
+
         public override void Place()
         {
             base.Place();
             OnStartConstruction();
         }
+        
         private void OnStartConstruction()
         {
             isOnConstruction = true;
@@ -39,12 +33,11 @@ namespace Entity.InGameObject.Buildings
             var constructionEndAction = new Action(() => { isOnConstruction = false; });
             timerPanel.StartATime(itemSo,buildingSo.finishForProduction, EndOfTimeAction + constructionEndAction);
 
-            if (buildingInGameSaveSo == null || (buildingInGameSaveSo != null && buildingInGameSaveSo.buildingSo == null))
+            if (IsItCreatedFromUser())
             {
                 CreateNewInstance(buildingSo);
             }
         }
-
         private void CreateNewInstance(BuildingSo buildingSo)
         {
             buildingInGameSaveSo = new BuildingInGameSaveSo()
@@ -53,23 +46,22 @@ namespace Entity.InGameObject.Buildings
                 position = transform.position
             };
             
-            var buildingSaveSos = GameManager.saveManager.gameDataSo.buildingsSo.buildingSaveSos;
+            var buildingSaveSos = BuildingsSo.buildingSaveSos;
             buildingSaveSos.Add(buildingInGameSaveSo);
         }
-        protected void SetState(ProductionState state)
-        {
-            currentState = state;
-            buildingInGameSaveSo.productionState = state;
-        }
-        protected void SetLeftTime(float leftTime)
-        {
-            buildingInGameSaveSo.leftTime = leftTime;
-        }
+       
         public virtual void SetActionBuilding()
         {
             base.EndOfTimeAction();
             isOnConstruction = false;
         }
+        
+        private bool IsItCreatedFromUser() =>  buildingInGameSaveSo == null ||
+        (buildingInGameSaveSo != null && buildingInGameSaveSo.buildingSo == null);
+        protected void SetState(ProductionState state) => buildingInGameSaveSo.productionState = currentState = state;
+        protected void SetLeftTime(float leftTime) => buildingInGameSaveSo.leftTime = leftTime;
+        public BuildingsSo BuildingsSo => GameManager.saveManager.gameDataSo.buildingsSo;
+        public InventorySo InventorySo => GameManager.saveManager.gameDataSo.inventorySo;
     }
 
 }

@@ -74,7 +74,7 @@ namespace Entity.InGameObject.Buildings
         {
             informationUIPanel.informationPanel.gameObject.SetActive(true);
 
-            var category = GameManager.saveManager.gameDataSo.inventorySo.GetInventoryCategory(InventoryCategories.Products);
+            var category = InventorySo.GetInventoryCategory(InventoryCategories.Products);
             foreach (var inventoryItem in category.inventoryItems)
             {
                 if(inventoryItem.itemSo.GetType() != typeof(SeedSo))
@@ -172,7 +172,7 @@ namespace Entity.InGameObject.Buildings
         private void UpdateInventory()
         {
             var amountOfProduct = plantItemSo.amountOfProduct;
-            GameManager.saveManager.gameDataSo.inventorySo.AddInventoryItem(plantItemSo, amountOfProduct);
+            InventorySo.AddInventoryItem(plantItemSo, amountOfProduct);
             GameManager.inventoryManager.inventoryItemController.SpawnInventoryUIItem(plantItemSo, amountOfProduct);
         }
     }
