@@ -139,4 +139,20 @@ after finish time, you can harvest it and it will add new item to inventory.
 ![](GitAsset/Harvesting/7.png)
 
 
+## Conclusion
 
+This architecture is designed to create a modular game structure.
+
+### Future Improvements
+- Add event-based communication between managers.
+- Optimize controller logic for better performance.
+- Implement a dependency injection system to improve modularity.
+
+---
+
+✅ This project will not be updated in the future.
+
+---
+
+# License
+Free to use for anything.
