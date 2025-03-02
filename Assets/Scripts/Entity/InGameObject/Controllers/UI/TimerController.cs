@@ -19,7 +19,6 @@ namespace Entity.InGameObject.Controllers.UI
 
         public void StartATime(ItemSo itemSo, float leftTime = 0, Action endOfTimeAction = null, Action<float> updateTimeAction = null)
         {
-            Debug.Log("Left Time " + leftTime);
             timerPanel.SetActive(true);
             itemNameText.text = itemSo.itemName;
             StartCoroutine(Timer(itemSo, leftTime, endOfTimeAction, updateTimeAction));

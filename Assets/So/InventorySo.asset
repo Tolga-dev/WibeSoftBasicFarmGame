@@ -16,23 +16,13 @@ MonoBehaviour:
   - inventoryCategories: 0
     inventoryItems:
     - itemSo: {fileID: 11400000, guid: 5d756dac7fce61b4cb8862d30f0d202e, type: 2}
-      count: 100
-    - itemSo: {fileID: 11400000, guid: 7f0a4e73b0d1de609928c7e130c5eebe, type: 2}
-      count: 60
-    - itemSo: {fileID: 11400000, guid: 305dd976cd689c3fabd116336b521de9, type: 2}
-      count: 100
-    - itemSo: {fileID: 11400000, guid: 5388fb1b0db5033ee9e22d55d7a548e5, type: 2}
-      count: 100
-    - itemSo: {fileID: 11400000, guid: 19fed6ddb5569b140ace9a1bb5b96205, type: 2}
-      count: 106
+      count: 99
   - inventoryCategories: 1
     inventoryItems:
     - itemSo: {fileID: 11400000, guid: 40dfb84ecb8eb3c5ebfdcfc459bdd4dd, type: 2}
-      count: 100
-    - itemSo: {fileID: 11400000, guid: b5d3a74aed55566d3b1e28a139bc4f9f, type: 2}
-      count: 100
+      count: 97
   inventoryCurrencies:
   - currencyEnum: 0
-    currencyVal: 9
+    currencyVal: 21
   - currencyEnum: 1
-    currencyVal: 10
+    currencyVal: 15

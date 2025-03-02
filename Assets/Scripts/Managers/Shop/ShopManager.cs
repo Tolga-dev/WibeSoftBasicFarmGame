@@ -4,7 +4,6 @@ using Managers.Base;
 using Managers.Inventory;
 using So;
 using So.GameObjectsSo.Base;
-using So.GameObjectsSo.Building;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +15,7 @@ namespace Managers.Shop
     {
         public Transform buyButtonSpawnPoint;
     }
-    
+
     public class ShopManager : ManagerBase
     {
         public List<ShopSlots> shopSlotsList = new();
@@ -26,58 +25,50 @@ namespace Managers.Shop
         {
             var buildingsSo = gameManager.saveManager.gameDataSo.buildingsSo;
             var productsSo = gameManager.saveManager.gameDataSo.seedSo;
-            
+
             foreach (var shopSlots in shopSlotsList)
             {
-                shopSlots.categoryPanelOpenButton.onClick.AddListener(() =>
-                {
-                    foreach (var slots in shopSlotsList)
-                    {
-                        slots.categoryPanel.gameObject.SetActive(false);
-                    }
-                    shopSlots.categoryPanel.gameObject.SetActive(true);
-                });
+                InitializeShopSlot(shopSlots);
 
                 if (shopSlots.category == InventoryCategories.Buildings)
-                {
-                    foreach (var buildingSo in buildingsSo.buildingSo)
-                    {
-                        var createdBuy = Instantiate(buy, shopSlots.buyButtonSpawnPoint);
-                        var createdBuyText = createdBuy.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                        var createdBuyIcon = createdBuy.transform.GetChild(1).GetComponent<Image>();
-                        var currency = buildingSo.currencies[0];
-
-                        createdBuyIcon.sprite = buildingSo.itemSprite;
-                        createdBuyText.text = buildingSo.itemName + " " +currency.currencyVal + " " + currency.currencyEnum;
-                        
-                        createdBuy.onClick.AddListener(
-                            (() =>
-                            {
-                                BuyThisItem(buildingSo);
-                            }));
-                    }
-                }
+                    CreateShopItems(shopSlots, buildingsSo.buildingSo);
                 else if (shopSlots.category == InventoryCategories.Products)
-                {
-                    foreach (var seedSo in productsSo.seedSo)
-                    {
-                        var createdBuy = Instantiate(buy, shopSlots.buyButtonSpawnPoint);
-                        var createdBuyText = createdBuy.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                        var createdBuyIcon = createdBuy.transform.GetChild(1).GetComponent<Image>();
-                        var currency = seedSo.currencies[0];
-                        
-                        createdBuyIcon.sprite = seedSo.itemSprite;
-                        createdBuyText.text = seedSo.itemName + " " +currency.currencyVal + " " + currency.currencyEnum;
-                        
-                        createdBuy.onClick.AddListener(
-                            (() =>
-                            {
-                                BuyThisItem(seedSo);
-                            }));
-                    }
-                }
+                    CreateShopItems(shopSlots, productsSo.seedSo);
             }
+
             buy.gameObject.SetActive(false);
+        }
+
+        private void InitializeShopSlot(ShopSlots shopSlots)
+        {
+            shopSlots.categoryPanelOpenButton.onClick.AddListener(() =>
+            {
+                foreach (var slots in shopSlotsList)
+                    slots.categoryPanel.gameObject.SetActive(false);
+
+                shopSlots.categoryPanel.gameObject.SetActive(true);
+            });
+        }
+
+        private void CreateShopItems<T>(ShopSlots shopSlots, List<T> items) where T : ItemSo
+        {
+            foreach (var item in items)
+            {
+                var createdBuy = Instantiate(buy, shopSlots.buyButtonSpawnPoint);
+                SetShopItemUI(createdBuy, item);
+
+                createdBuy.onClick.AddListener(() => BuyThisItem(item));
+            }
+        }
+
+        private void SetShopItemUI(Button createdBuy, ItemSo item)
+        {
+            var createdBuyText = createdBuy.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            var createdBuyIcon = createdBuy.transform.GetChild(1).GetComponent<Image>();
+            var currency = item.currencies[0];
+
+            createdBuyIcon.sprite = item.itemSprite;
+            createdBuyText.text = $"{item.itemName} {currency.currencyVal} {currency.currencyEnum}";
         }
 
         private void BuyThisItem(ItemSo itemSo)
@@ -92,11 +83,10 @@ namespace Managers.Shop
                 Debug.Log("Cannot buy!");
                 return;
             }
-            
-            currencies.currencyVal -= itemCurrency.currencyVal;
 
-            inventoryManager.inventoryItemController.SpawnInventoryUIItem(itemSo,1);
-            inventorySo.AddInventoryItem(itemSo,1);
+            currencies.currencyVal -= itemCurrency.currencyVal;
+            inventoryManager.inventoryItemController.SpawnInventoryUIItem(itemSo, 1);
+            inventorySo.AddInventoryItem(itemSo, 1);
             inventoryManager.inventoryCurrencyController.UpdateCurrencyUI();
         }
     }
