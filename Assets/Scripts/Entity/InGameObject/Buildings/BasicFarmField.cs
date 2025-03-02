@@ -23,7 +23,6 @@ namespace Entity.InGameObject.Buildings
     [Serializable]
     public class InformationUIPanel
     {
-        [FormerlySerializedAs("seedPanel")] 
         public Transform informationPanel;
 
         public InformationButton informationButton;
@@ -134,8 +133,6 @@ namespace Entity.InGameObject.Buildings
 
             SetLeftTime(growthTime - currentTime);
         }
-
-
         protected override void EndOfTimeAction()
         {
             base.EndOfTimeAction();
