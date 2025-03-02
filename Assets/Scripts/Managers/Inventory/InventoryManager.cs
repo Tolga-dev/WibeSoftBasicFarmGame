@@ -17,16 +17,19 @@ namespace Managers.Inventory
     public class CategorySlots
     {
         public InventoryCategories category;
-        public List<InventorySlot> slots = new List<InventorySlot>();
         public Button categoryPanelOpenButton;
         public Transform categoryPanel;
-
+    }
+    [Serializable]
+    public class InventorySlots : CategorySlots
+    {
+        public List<InventorySlot> slots = new List<InventorySlot>();
     }
     
     public class InventoryManager : ManagerBase
     {
         [Header("Slots")] 
-        public List<CategorySlots> categorySlotsList = new();
+        public List<InventorySlots> categorySlotsList = new();
         
         public InventoryItem itemPrefab;
         public Transform draggableItemsParent;
@@ -89,7 +92,7 @@ namespace Managers.Inventory
             currentSlot.HandleAmount();
         }
 
-        private void UpdateCurrencyUI()
+        public void UpdateCurrencyUI()
         {
             var inventorySo = gameManager.saveManager.gameDataSo.inventorySo;
             silverText.text = "Silver:" + inventorySo.GetCurrencies(CurrencyEnum.Silver).currencyVal;
@@ -113,7 +116,7 @@ namespace Managers.Inventory
             }
             return 0;
         }
-        private int SearchForEmptyItem(CategorySlots categorySlots,ItemSo inventoryItem, int amount)
+        private int SearchForEmptyItem(InventorySlots categorySlots,ItemSo inventoryItem, int amount)
         {
             foreach (var inventorySlot in categorySlots.slots)
             {
@@ -139,7 +142,7 @@ namespace Managers.Inventory
             return createdItem;
         }
         
-        private int SearchForSameItem(CategorySlots categorySlots,ItemSo inventoryItem, int amount)
+        private int SearchForSameItem(InventorySlots categorySlots,ItemSo inventoryItem, int amount)
         {
             foreach (var inventorySlot in categorySlots.slots)
             {
@@ -157,9 +160,9 @@ namespace Managers.Inventory
             return amount;
         }
 
-        public CategorySlots GetSlot(ItemSo inventoryItem)
+        public InventorySlots GetSlot(ItemSo inventoryItem)
         {
-            CategorySlots categorySlots = null;
+            InventorySlots categorySlots = null;
             foreach (var inventorySlot in categorySlotsList)
             {
                 if (inventorySlot.category == inventoryItem.inventoryCategory)

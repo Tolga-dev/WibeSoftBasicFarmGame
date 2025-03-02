@@ -28,7 +28,9 @@ MonoBehaviour:
     - itemSo: {fileID: 11400000, guid: b5d3a74aed55566d3b1e28a139bc4f9f, type: 2}
       count: 35
   inventoryCurrencies:
-  - currencyEnum: 0
+  - icon: {fileID: 1954563645, guid: c5e0965bb249ab2488d4e772af463ae9, type: 3}
+    currencyEnum: 0
     currencyVal: 19
-  - currencyEnum: 1
+  - icon: {fileID: -1048698702, guid: c5e0965bb249ab2488d4e772af463ae9, type: 3}
+    currencyEnum: 1
     currencyVal: 47

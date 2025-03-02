@@ -10,7 +10,7 @@
 * save sistemi
   * building save system
     * position
-  
+
 * shop
   * kafama gore
 
@@ -19,5 +19,8 @@
 * Save Update
     * time
     * action
+
+* zoom in zoom out
+* closing ui elements easily
 
 * genel kod upadte

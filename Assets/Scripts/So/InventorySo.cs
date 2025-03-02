@@ -4,6 +4,7 @@ using So.GameObjectsSo.Base;
 using So.GameObjectsSo.Seed;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace So
 {
@@ -139,7 +140,6 @@ namespace So
         public CurrencyEnum currencyEnum;
         public int currencyVal;
     }
-    
 
     public enum CurrencyEnum
     {
