@@ -19,29 +19,33 @@ namespace Entity.InGameObject.Controllers.UI
 
         public void StartATime(ItemSo itemSo,float time, Action endOfTimeAction = null)
         {
+            Debug.Log("Timer Started " + time);
             timerPanel.SetActive(true);
             itemNameText.text = itemSo.itemName;
-            StartCoroutine(Time(time, endOfTimeAction));
+            StartCoroutine(Timer(time, endOfTimeAction));
         }
-        private IEnumerator Time(float finishTimeToFinish, Action endOfTimeAction = null)
+        private IEnumerator Timer(float finishTimeToFinish, Action endOfTimeAction = null)
         {
             var time = finishTimeToFinish;
-            var interval = time / 100f;
-            var currentTime = 0f;
-
             slider.maxValue = time;
             slider.value = 0f;
 
-            while (currentTime < time)
+            var startTime = Time.time;
+            var endTime = startTime + time;
+
+            while (Time.time < endTime)
             {
-                currentTime += interval;
+                var currentTime = Time.time - startTime;
                 slider.value = currentTime;
                 timerText.text = (time - currentTime).ToString("F2", CultureInfo.InvariantCulture);
-                yield return new WaitForSeconds(interval);
+                yield return null;
             }
-            
+
+            slider.value = time;
+            timerText.text = "0.00";
             endOfTimeAction?.Invoke();
         }
+
 
         public void OnDisable()
         {

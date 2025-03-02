@@ -9,8 +9,7 @@ namespace Entity.InGameObject.Buildings
 {
     public class BuildingBase : InGameObjectBase
     {
-        public BuildingInGameSaveSo buildingInGameSaveSo;
-        public bool isOnConstruction;
+        public bool isOnConstruction = false;
         public ProductionState currentState = ProductionState.Empty;
 
         public override bool CanClickToGameObject()
@@ -22,7 +21,6 @@ namespace Entity.InGameObject.Buildings
             }
             return base.CanClickToGameObject();
         }
-
         public override void Place()
         {
             base.Place();
@@ -39,22 +37,17 @@ namespace Entity.InGameObject.Buildings
             var constructionEndAction = new Action(() => { isOnConstruction = false; });
             timerPanel.StartATime(itemSo,buildingSo.finishTimeToConstruction, EndOfTimeAction + constructionEndAction);
         }
-        public void SetState(ProductionState state)
+
+        protected void SetState(ProductionState state)
         {
             currentState = state;
-            buildingInGameSaveSo.productionState = currentState;
+        }
+        protected void SetLeftTime(float leftTime)
+        {
         }
 
-        public void SetLeftTime(float leftTime)
+        protected void SetLeftTimeReduce(float leftTime)
         {
-            buildingInGameSaveSo.leftTime = leftTime;
-        }
-        public void SetLeftTimeReduce(float leftTime)
-        {
-            buildingInGameSaveSo.leftTime -= leftTime;
-
-            if (buildingInGameSaveSo.leftTime < 0)
-                buildingInGameSaveSo.leftTime = 0;
         }
         public virtual void SetActionBuilding(BuildingInGameSaveSo building)
         {

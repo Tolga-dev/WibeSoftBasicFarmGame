@@ -23,5 +23,5 @@ MonoBehaviour:
   inventoryCategory: 1
   itemConstructionSprite: {fileID: 21300000, guid: 35bfe8d0a8680444db414f86cfeabb82, type: 3}
   buildingType: 1
-  finishTimeToConstruction: 0
+  finishTimeToConstruction: 0.5
   buildPrefab: {fileID: 5249543589208906696, guid: 0f19cf462a463834f9e00762b8e81723, type: 3}

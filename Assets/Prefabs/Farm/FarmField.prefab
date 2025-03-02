@@ -443,8 +443,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startTheAction: {fileID: 6616663655830321597}
-  itemSprite: {fileID: 1437291941300359192}
-  itemCount: {fileID: 1460578192420435920}
+  productItemSprite: {fileID: 1437291941300359192}
+  productItemCount: {fileID: 1460578192420435920}
 --- !u!1 &3056134360318541826
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,13 +501,13 @@ MonoBehaviour:
     m_Size: {x: 1, y: 1, z: 1}
   itemSo: {fileID: 11400000, guid: b5d3a74aed55566d3b1e28a139bc4f9f, type: 2}
   isOnConstruction: 0
+  currentState: 0
   informationUIPanel:
     informationPanel: {fileID: 2068314302762218047}
     informationButton: {fileID: 3453573819634942752}
     createdButtons: []
   plantItemRenderer: {fileID: 1175494771466389499}
   plantItemSo: {fileID: 0}
-  currentState: 0
 --- !u!1 &4055120327513838986
 GameObject:
   m_ObjectHideFlags: 0

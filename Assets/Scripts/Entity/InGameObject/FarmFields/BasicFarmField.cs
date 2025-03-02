@@ -81,6 +81,9 @@ namespace Entity.InGameObject.FarmFields
             var category = GameManager.saveManager.gameDataSo.inventorySo.GetInventoryCategory(InventoryCategories.Products);
             foreach (var inventoryItem in category.inventoryItems)
             {
+                if(inventoryItem.itemSo.GetType() != typeof(SeedSo))
+                    continue;
+                
                 var createdObject = Instantiate(informationUIPanel.informationButton, informationUIPanel.informationPanel);
 
                 var button = createdObject.startTheAction;
