@@ -16,13 +16,13 @@ MonoBehaviour:
   - inventoryCategories: 0
     inventoryItems:
     - itemSo: {fileID: 11400000, guid: 5d756dac7fce61b4cb8862d30f0d202e, type: 2}
-      count: 99
+      count: 104
   - inventoryCategories: 1
     inventoryItems:
     - itemSo: {fileID: 11400000, guid: 40dfb84ecb8eb3c5ebfdcfc459bdd4dd, type: 2}
-      count: 97
+      count: 102
   inventoryCurrencies:
   - currencyEnum: 0
-    currencyVal: 21
+    currencyVal: 300
   - currencyEnum: 1
-    currencyVal: 15
+    currencyVal: 100
